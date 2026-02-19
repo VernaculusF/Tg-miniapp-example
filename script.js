@@ -7,7 +7,9 @@
 const tg = window.Telegram.WebApp;
 
 // Configuration
-const API_BASE_URL = 'http://localhost:5000/api';
+const apiFromQuery = new URLSearchParams(window.location.search).get('api');
+const apiFromStorage = localStorage.getItem('API_BASE_URL');
+const API_BASE_URL = (apiFromQuery || apiFromStorage || 'http://localhost:5000/api').replace(/\/$/, '');
 
 // Application state
 let currentUser = null;
