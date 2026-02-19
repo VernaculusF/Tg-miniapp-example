@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Telegram Mini App - Clicker Game">
+    <title>Clicker Game - Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎮 Clicker Game</h1>
+            <p class="subtitle">Earn coins by clicking! Compete with others!</p>
+        </div>
+
+        <!-- User Info -->
+        <div class="user-card">
+            <div class="user-info">
+                <span class="hello">Welcome,</span>
+                <span class="username" id="userName">User</span>
+            </div>
+        </div>
+
+        <!-- Main Balance Display -->
+        <div class="balance-card">
+            <div class="balance-display">
+                <span class="currency-icon">💰</span>
+                <span id="balance" class="balance-amount">0</span>
+            </div>
+            <p class="balance-label">Your Balance</p>
+        </div>
+
+        <!-- Stats Display -->
+        <div class="stats-card">
+            <div class="stat-box">
+                <span class="stat-label">Total Clicks</span>
+                <span class="stat-value" id="clicks">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Per Click</span>
+                <span class="stat-value">+10</span>
+            </div>
+        </div>
+
+        <!-- Main Click Button -->
+        <button class="click-button" id="clickButton">
+            <span class="button-text">CLICK!</span>
+            <span class="button-icon">👆</span>
+        </button>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <button class="action-btn stats-btn" id="statsButton" title="View your statistics">
+                📊 Stats
+            </button>
+            <button class="action-btn leaderboard-btn" id="leaderboardButton" title="View top players">
+                🏆 Leaderboard
+            </button>
+            <button class="action-btn withdraw-btn" id="withdrawButton" title="Withdraw coins">
+                💸 Withdraw
+            </button>
+            <button class="action-btn refresh-btn" id="refreshButton" title="Refresh data">
+                🔄 Refresh
+            </button>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="leaderboard-section">
+            <h2>🏆 Top Players</h2>
+            <div class="leaderboard-container" id="leaderboard">
+                <p class="loading">Loading leaderboard...</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Telegram Mini App • Made with ❤️</p>
+            <p class="small-text">Earn coins, compete with friends, withdraw anytime!</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

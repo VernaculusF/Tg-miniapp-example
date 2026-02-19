@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install build twine
+    
+    - name: Build distribution
+      run: |
+        cd backend
+        python -m build
+    
+    - name: Create Release Notes
+      run: |
+        echo "# Release ${{ github.ref }}" > RELEASE_NOTES.md
+        echo "" >> RELEASE_NOTES.md
+        echo "See CHANGELOG.md for detailed changes." >> RELEASE_NOTES.md
+    
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          backend/dist/*
+          CHANGELOG.md
+          README.md
+        draft: false
+        prerelease: false
+        body_path: RELEASE_NOTES.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
