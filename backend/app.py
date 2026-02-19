@@ -156,5 +156,11 @@ def health():
 
 
 if __name__ == '__main__':
-    print("[INFO] Starting Flask API server on http://localhost:5000")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Security: debug mode disabled by default, can be enabled via FLASK_DEBUG env var
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    # Security: bind to localhost by default, can be changed via FLASK_HOST env var
+    host = os.getenv('FLASK_HOST', '127.0.0.1')
+    port = int(os.getenv('FLASK_PORT', '5000'))
+    
+    print(f"[INFO] Starting Flask API server on http://{host}:{port} (debug={debug_mode})")
+    app.run(debug=debug_mode, host=host, port=port)

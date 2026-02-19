@@ -52,7 +52,13 @@ Create backend/.env:
 ```
 BOT_TOKEN=YOUR_BOT_TOKEN
 FRONTEND_URL=https://vernaculusf.github.io/Tg-miniapp-example/
+
+# Optional: Flask API security settings
+# FLASK_DEBUG=False  # Never enable debug in production!
+# FLASK_HOST=127.0.0.1  # Default: localhost only
+# FLASK_PORT=5000
 ```
+**Security Note**: The Flask API runs in production mode by default (`debug=False`, `host=127.0.0.1`). Only change these if you understand the security implications.
 
 ### 4) Run Backend, HTTPS Tunnel, and Bot (Working Setup)
 This app needs an HTTPS API when the Web App is opened inside Telegram.
