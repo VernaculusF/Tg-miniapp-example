@@ -35,7 +35,6 @@ env/
 *.swp
 *.swo
 *~
-.DS_Store
 
 # Environment variables
 .env
@@ -59,11 +58,5 @@ Thumbs.db
 node_modules/
 package-lock.json
 
-# Build directories
-/dist
-/build
+# Cache
 .cache/
-
-# OS specific
-.env.production
-.env.development
