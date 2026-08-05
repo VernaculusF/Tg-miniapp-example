@@ -1,114 +1,71 @@
-# Telegram Mini App - Clicker Game
+# Telegram Mini App Clicker
 
-A simple Telegram bot with a Web App clicker game. Users earn coins by clicking, see a leaderboard, and view stats.
+Пример Telegram Mini App с фронтендом-кликером, Flask API и Telegram-ботом. Проект показывает передачу пользователя из бота в Web App и взаимодействие фронтенда с API.
 
-Demo (Web App): https://vernaculusf.github.io/Tg-miniapp-example/
-Repository: https://github.com/VernaculusF/Tg-miniapp-example
-            
-## Features
-- Web App inside Telegram
-- User profiles and stats
-- Click-to-earn coins
-- Top 10 leaderboard
-- Withdraw flow
+## Возможности
 
-## Tech Stack
-Backend: Python, Flask, python-telegram-bot
-Frontend: HTML, CSS, Vanilla JavaScript, Telegram Web App API
+- открытие Mini App из Telegram-бота;
+- начисление монет за клики;
+- хранение статистики пользователей в памяти процесса;
+- таблица лидеров и обработка списания монет;
+- команды бота для просмотра статистики.
 
-## Project Structure
-```
-Tg-miniapp-example/
-├── backend/
-│   ├── app.py
-│   ├── bot.py
-│   ├── .env
-│   └── requirements.txt
-├── index.html
-├── script.js
-├── style.css
-├── README.md
-├── LICENSE
-└── .env.example
-```
+## Стек
 
-## Setup
+- HTML, CSS и JavaScript
+- Telegram Web App API
+- Python и Flask
+- python-telegram-bot
 
-### 1) Create a Telegram Bot
-1. Open Telegram and message @BotFather
-2. Use /newbot
-3. Copy the bot token
+## Быстрый старт
 
-### 2) Install Backend Dependencies
-```
+Создайте бота через BotFather, затем подготовьте окружение backend:
+
+```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
+cp ../.env.example .env
 ```
 
-### 3) Configure Environment
-Create backend/.env:
-```
-BOT_TOKEN=YOUR_BOT_TOKEN
-FRONTEND_URL=https://vernaculusf.github.io/Tg-miniapp-example/
+Укажите `BOT_TOKEN` и HTTPS-адрес фронтенда в `backend/.env`. Запустите API:
 
-# Optional: Flask API security settings
-# FLASK_DEBUG=False  # Never enable debug in production!
-# FLASK_HOST=127.0.0.1  # Default: localhost only
-# FLASK_PORT=5000
-```
-**Security Note**: The Flask API runs in production mode by default (`debug=False`, `host=127.0.0.1`). Only change these if you understand the security implications.
-
-### 4) Run Backend, HTTPS Tunnel, and Bot (Working Setup)
-This app needs an HTTPS API when the Web App is opened inside Telegram.
-
-Terminal 1 (API):
-```
-cd backend
+```bash
 python app.py
 ```
 
-Terminal 2 (HTTPS tunnel for API):
-```
-cloudflared tunnel --url http://localhost:5000
-```
-Copy the HTTPS URL from cloudflared, for example:
-```
-https://your-random.trycloudflare.com
+Telegram требует HTTPS для Web App и API. Опубликуйте фронтенд на HTTPS-хостинге и предоставьте API через HTTPS, затем задайте URL с параметром API:
+
+```dotenv
+FRONTEND_URL=https://example.com/?api=https://api.example.com/api
 ```
 
-Update backend/.env so the bot opens the Web App with API param:
-```
-FRONTEND_URL=https://vernaculusf.github.io/Tg-miniapp-example/?api=https://your-random.trycloudflare.com/api
-```
+В отдельном процессе запустите бота:
 
-Terminal 3 (Bot):
-```
+```bash
 cd backend
 python bot.py
 ```
 
-## Bot Commands
-- /start
-- /help
-- /stats
-- /leaderboard
-- /withdraw
+Демонстрационный фронтенд: `https://vernaculusf.github.io/Tg-miniapp-example/`.
 
-## API Endpoints
-- POST /api/user
-- POST /api/click
-- POST /api/withdraw
-- POST /api/stats
-- GET  /api/leaderboard
-- GET  /health
+## Структура проекта
 
-## Notes
-- Telegram requires HTTPS for Web App buttons and HTTPS for API calls.
-- If you host the frontend elsewhere, update FRONTEND_URL in backend/.env.
-- If you see 409 Conflict, you have more than one bot instance running.
-- Cloudflare Tunnel often fails when VPN is on. Turn VPN off before starting the tunnel.
+```text
+.
+├── index.html          # разметка Mini App
+├── style.css           # стили фронтенда
+├── script.js           # логика кликера и запросы к API
+├── backend/
+│   ├── app.py          # Flask API
+│   ├── bot.py          # Telegram-бот
+│   └── requirements.txt
+└── .env.example        # пример конфигурации
+```
 
-## License
-MIT License. See LICENSE.
+API хранит данные в памяти, поэтому состояние сбрасывается при перезапуске процесса.
+
+## Лицензия
+
+MIT
