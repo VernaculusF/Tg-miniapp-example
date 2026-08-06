@@ -1,25 +1,25 @@
 # Telegram Mini App Clicker
 
-Пример Telegram Mini App с фронтендом-кликером, Flask API и Telegram-ботом. Проект показывает передачу пользователя из бота в Web App и взаимодействие фронтенда с API.
+An example Telegram Mini App with a clicker frontend, a Flask API, and a Telegram bot. It demonstrates opening a Web App from a bot and sending requests from the frontend to the API.
 
-## Возможности
+## Features
 
-- открытие Mini App из Telegram-бота;
-- начисление монет за клики;
-- хранение статистики пользователей в памяти процесса;
-- таблица лидеров и обработка списания монет;
-- команды бота для просмотра статистики.
+- Open the Mini App from a Telegram bot.
+- Award coins for clicks.
+- Store user statistics in process memory.
+- Display a leaderboard and process coin deductions.
+- Provide bot commands for viewing statistics.
 
-## Стек
+## Stack
 
-- HTML, CSS и JavaScript
+- HTML, CSS, and JavaScript
 - Telegram Web App API
-- Python и Flask
+- Python and Flask
 - python-telegram-bot
 
-## Быстрый старт
+## Quick start
 
-Создайте бота через BotFather, затем подготовьте окружение backend:
+Create a bot with BotFather, then prepare the backend environment:
 
 ```bash
 cd backend
@@ -29,43 +29,43 @@ pip install -r requirements.txt
 cp ../.env.example .env
 ```
 
-Укажите `BOT_TOKEN` и HTTPS-адрес фронтенда в `backend/.env`. Запустите API:
+Set `BOT_TOKEN` and the HTTPS frontend address in `backend/.env`, then start the API:
 
 ```bash
 python app.py
 ```
 
-Telegram требует HTTPS для Web App и API. Опубликуйте фронтенд на HTTPS-хостинге и предоставьте API через HTTPS, затем задайте URL с параметром API:
+Telegram requires HTTPS for both the Web App and API. Deploy both services with HTTPS and set the frontend URL with the API query parameter:
 
 ```dotenv
 FRONTEND_URL=https://example.com/?api=https://api.example.com/api
 ```
 
-В отдельном процессе запустите бота:
+Start the bot in a separate process:
 
 ```bash
 cd backend
 python bot.py
 ```
 
-Демонстрационный фронтенд: `https://vernaculusf.github.io/Tg-miniapp-example/`.
+The demonstration frontend is available at `https://vernaculusf.github.io/Tg-miniapp-example/`.
 
-## Структура проекта
+## Project structure
 
 ```text
 .
-├── index.html          # разметка Mini App
-├── style.css           # стили фронтенда
-├── script.js           # логика кликера и запросы к API
+├── index.html          # Mini App markup
+├── style.css           # Frontend styles
+├── script.js           # Clicker logic and API requests
 ├── backend/
 │   ├── app.py          # Flask API
-│   ├── bot.py          # Telegram-бот
+│   ├── bot.py          # Telegram bot
 │   └── requirements.txt
-└── .env.example        # пример конфигурации
+└── .env.example        # Configuration example
 ```
 
-API хранит данные в памяти, поэтому состояние сбрасывается при перезапуске процесса.
+The API stores data in memory, so all state is reset when the process restarts.
 
-## Лицензия
+## License
 
 MIT
